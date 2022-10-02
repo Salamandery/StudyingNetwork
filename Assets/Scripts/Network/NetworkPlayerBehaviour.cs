@@ -32,6 +32,7 @@ public class NetworkPlayerBehaviour : NetworkBehaviour
     [Command]
     private void CmdSetDisplayName(string newDisplayName)
     {
+        RpcLogNewName(newDisplayName);
         SetDisplayName(newDisplayName);
     }
     #endregion
@@ -45,6 +46,18 @@ public class NetworkPlayerBehaviour : NetworkBehaviour
     private void HandlerTextDisplayName(string displayName, string newTextDisplay)
     {
         textDisplayName.text = newTextDisplay;
+    }
+
+    [ContextMenu("Set My Name")]
+    public void SetMyName()
+    {
+        CmdSetDisplayName("Guest");
+    }
+
+    [ClientRpc]
+    private void RpcLogNewName(string newDisplayName)
+    {
+
     }
     #endregion
     void Start()
